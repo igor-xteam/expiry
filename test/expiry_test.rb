@@ -137,4 +137,12 @@ class ExpiryTest < ActiveSupport::TestCase #:nodoc:
     end
   end
   
+  test 'it should expire manually' do
+    expirator = @expirator_klass.create({:expires_at => 10.minutes.from_now})
+    
+    expirator.expired!
+    
+    assert_in_delta(Time.now, expirator.expires_at, 2.seconds)
+  end
+  
 end

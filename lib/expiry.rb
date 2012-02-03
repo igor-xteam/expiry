@@ -57,6 +57,10 @@ module Expiry
     end
   end
   
+  def expired!
+    expiry Time.now
+  end
+  
   def expiry_left
     self.expires_at.blank? ? nil : self.expires_at - Time.now
   end
